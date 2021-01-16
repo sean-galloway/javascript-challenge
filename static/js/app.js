@@ -28,6 +28,7 @@ populate(tableData);
 btnReset.on("click", () => {
     // clear out the table
     tbody.html("");
+
     // populate the table
     populate(tableData);
     console.log("Reset Button Pushed")
@@ -57,24 +58,19 @@ function empty(data)
 // Filter Sightings
 btnFilter.on("click", () => {
     d3.event.preventDefault();
-    // Get the input data
-    var inpDate = fieldDateTime.property("value").trim();
-    var inpCity = fieldCity.property("value").toLowerCase().trim();
-    var inpState = fieldState.property("value").toLowerCase().trim();
-    var inpCountry = fieldCountry.property("value").toLowerCase().trim();
-    var inpShape = fieldShape.property("value").toLowerCase().trim();
 
-    // Set up a filter object
+    // Set up a filter object with the input data
     var filter = {
-        datetime: inpDate,
-        city: inpCity,
-        state: inpState,
-        country: inpCountry,
-        shape: inpShape
+        datetime: fieldDateTime.property("value").trim(),
+        city: fieldCity.property("value").toLowerCase().trim(),
+        state: fieldState.property("value").toLowerCase().trim(),
+        country: fieldCountry.property("value").toLowerCase().trim(),
+        shape: fieldShape.property("value").toLowerCase().trim()
     };
 
     var filteredData = tableData;
 
+    // Run each filter on the data
     for (var key in filter) {
         if (! empty(filter[key])) {
             filteredData = filteredData.filter(sighting => filter[key] === sighting[key])
@@ -83,6 +79,7 @@ btnFilter.on("click", () => {
 
     // clear out the table
     tbody.html("");
+
     // populate the table
     populate(filteredData);
     console.log("Filter Button Pushed")
