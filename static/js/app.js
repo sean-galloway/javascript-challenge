@@ -81,6 +81,14 @@ btnFilter.on("click", () => {
     tbody.html("");
 
     // populate the table
-    populate(filteredData);
+    if (filteredData.length !== 0) {
+        populate(filteredData);
+    } else {
+        var row = tbody.append("tr");
+        row.append("td").text("Found no results");
+        for (var i=0; i<6; i++) {
+            row.append("td").text(" ");
+        }
+    }
     console.log("Filter Button Pushed")
 })
