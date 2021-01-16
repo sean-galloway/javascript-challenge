@@ -73,7 +73,7 @@ btnFilter.on("click", () => {
     // Run each filter on the data
     for (var key in filter) {
         if (! empty(filter[key])) {
-            filteredData = filteredData.filter(sighting => filter[key] === sighting[key])
+            filteredData = filteredData.filter(sighting => filter[key] === sighting[key]);
         }
     }
 
@@ -86,7 +86,7 @@ btnFilter.on("click", () => {
     } else {
         var row = tbody.append("tr");
         row.append("td").text("Found no results");
-        for (var i=0; i<6; i++) {
+        for (var i=0; i<keys.length-1; i++) {
             row.append("td").text(" ");
         }
     }
