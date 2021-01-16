@@ -76,7 +76,7 @@ btnFilter.on("click", () => {
     var filteredData = tableData;
 
     // Run each filter on the data
-    Object.entries(filter).forEach(([key, value]) => { if (! empty(value)) filteredData = filteredData.filter(sighting => filter[key] === sighting[key]);})
+    Object.entries(filter).forEach(([key, value]) => { if (! empty(value)) filteredData = filteredData.filter(sighting => value === sighting[key]);})
 
     // clear out the table
     tbody.html("");
