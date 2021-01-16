@@ -29,6 +29,13 @@ btnReset.on("click", () => {
     // clear out the table
     tbody.html("");
 
+    // Clear out the filter text
+    fieldDateTime.node().value = "";
+    fieldCity.node().value = "";
+    fieldState.node().value = "";
+    fieldCountry.node().value = "";
+    fieldShape.node().value = "";
+
     // populate the table
     populate(tableData);
     console.log("Reset Button Pushed")
@@ -57,8 +64,6 @@ function empty(data)
 
 // Filter Sightings
 btnFilter.on("click", () => {
-    d3.event.preventDefault();
-
     // Set up a filter object with the input data
     var filter = {
         datetime: fieldDateTime.property("value").trim(),
@@ -71,11 +76,7 @@ btnFilter.on("click", () => {
     var filteredData = tableData;
 
     // Run each filter on the data
-    for (var key in filter) {
-        if (! empty(filter[key])) {
-            filteredData = filteredData.filter(sighting => filter[key] === sighting[key]);
-        }
-    }
+    Object.entries(filter).forEach(([key, value]) => { if (! empty(value)) filteredData = filteredData.filter(sighting => filter[key] === sighting[key]);})
 
     // clear out the table
     tbody.html("");
@@ -86,7 +87,7 @@ btnFilter.on("click", () => {
     } else {
         var row = tbody.append("tr");
         row.append("td").text("Found no results");
-        for (var i=0; i<keys.length-1; i++) {
+        for (var i=0; i < keys.length-1; i++) {
             row.append("td").text(" ");
         }
     }
