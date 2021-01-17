@@ -14,7 +14,7 @@ var fieldCountry = d3.select("#country");
 var fieldShape = d3.select("#shape");
 
 // Populate the Table Function
-var populate = (inputData) => {
+function populate(inputData) {
     inputData.forEach(sighting => {
         var row = tbody.append("tr");
         keys.forEach(key => row.append("td").text(sighting[key]));
