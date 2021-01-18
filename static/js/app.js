@@ -64,6 +64,9 @@ function empty(data)
 
 // Filter Sightings
 btnFilter.on("click", () => {
+    // Prevent the page from refreshing
+    d3.event.preventDefault();
+
     // Set up a filter object with the input data
     var filter = {
         datetime: fieldDateTime.property("value").trim(),
@@ -76,7 +79,7 @@ btnFilter.on("click", () => {
     var filteredData = tableData;
 
     // Run each filter on the data
-    Object.entries(filter).forEach(([key, value]) => { if (! empty(value)) filteredData = filteredData.filter(sighting => value === sighting[key]);})
+    Object.entries(filter).forEach(([key, value]) => { if (! empty(value)) filteredData = filteredData.filter(sighting => value === sighting[key]);});
 
     // clear out the table
     tbody.html("");
